@@ -17,8 +17,8 @@ namespace Revolutions.Projectiles.RareWeapon
         }
         public override void SetDefaults()
         {
-            projectile.width = 28;
-            projectile.height = 28;
+            projectile.width = 24;
+            projectile.height = 17;
             projectile.friendly = true;
             projectile.magic = true;
             projectile.ignoreWater = false;
@@ -34,7 +34,7 @@ namespace Revolutions.Projectiles.RareWeapon
             projectile.alpha = 0;
 
             projectile.frameCounter++;
-            if (projectile.frameCounter == 3)
+            if (projectile.frameCounter == 5)
             {
                 projectile.frameCounter = 0;
                 projectile.frame++;
@@ -52,7 +52,6 @@ namespace Revolutions.Projectiles.RareWeapon
             {
                 projectile.stepSpeed -= 0.79f;
                 Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, MyDustId.PurpleHighFx, 0f, 0f, 100, default(Color), 1f);
-                //Dust dust1 = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, MyDustId.ThinPinkMaterial, 0f, 0f, 200, default(Color), 0.8f);
                 dust.noGravity = true;
             }
             if (projectile.timeLeft < 300)
@@ -76,13 +75,9 @@ namespace Revolutions.Projectiles.RareWeapon
             if (target != null && projectile.timeLeft < 579)
             {
                 Vector2 targetVec = target.Center - projectile.Center;
-                //选出目标向量
                 targetVec.Normalize();
-                //转化为单位向量
                 targetVec *= 30f;
-                //长度变为30
                 projectile.velocity = (projectile.velocity * 30f + targetVec) / 31f;
-                //在原有速度基础上偏移
             }
             projectile.rotation = projectile.velocity.ToRotation();
         }
